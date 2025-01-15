@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="owl.Dashboard" owl="1">
+        <div class="grid-container">
+            <main class="main-container">
+                <div class="main-title">
+                    <p class="app-page-title">
+                        Nombre total de tickets 
+                        <span class="ticket_count" t-esc="state.totalTickets"/>
+                    </p>
+                </div>
+                <div class="style-switcher">
+                    <div class="style-switcher-toggler s-icon">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <p>Choisir une période</p>
+                    <div class="search">
+                        <select id="chart-selection">
+                            <option value="all">Tous</option>
+                            <option value="today">Aujourd'hui</option>
+                            <option value="month">Ce mois</option>
+                            <option value="week">Cette semaine</option>
+                            <option value="year">Cette année</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Cards Items -->
+                <div class="main-cards">
+                    <div class="card" data-state="new">
+                        <div class="card-inner">
+                            <p class="text-primary">Nouveaux Tickets</p>
+                            <span class="text-blue fa fa-tags"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold new_ticket_count"></span>
+                    </div>
+
+                    <div class="card" data-state="in_progress">
+                        <div class="card-inner">
+                            <p class="text-primary">Tickets en Cours</p>
+                            <span class="text-orange fa fa-clock-o"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold in_progress_ticket_count"></span>
+                    </div>
+
+                    <div class="card" data-state="done">
+                        <div class="card-inner">
+                            <p class="text-primary">Tickets Terminés</p>
+                            <span class="text-green fa fa-check-circle"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold done_ticket_count"></span>
+                    </div>
+
+                    <div class="card" data-state="cancelled">
+                        <div class="card-inner">
+                            <p class="text-primary">Tickets Annulés</p>
+                            <span class="text-red fa fa-times-circle-o"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold cancelled_ticket_count"></span>
+                    </div>
+                </div>
+
+                <!-- Cart Emergency -->
+                <div class="main-emergency">
+                    <div class="card-one" data-state="moyen">
+                        <div class="card-inner">
+                            <p class="text-primary">Ticket avec urgence moyenne</p>
+                            <span class="text-blue"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold ticket_count_moyen"></span>
+                    </div>
+
+                    <div class="card-one" data-state="urgent">
+                        <div class="card-inner">
+                            <p class="text-primary">Tickets urgents</p>
+                            <span class="text-orange"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold ticket_count_urgent"></span>
+                    </div>
+
+                    <div class="card-one" data-state="très urgent">
+                        <div class="card-inner">
+                            <p class="text-primary">Tickets très urgents</p>
+                            <span class="text-red"></span>
+                        </div>
+                        <span class="text-primary font-weight-bold ticket_count_tres_urgent"></span>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts">
+                    <div class="charts-card">
+                        <p class="chart-title">Tickets par Statuts</p>
+                        <div class="chart-container">
+                            <canvas id="pie-chart" class="chart-clickable" data-state="status"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="charts-card">
+                        <p class="chart-title">Tickets par Etapes</p>
+                        <canvas id="line-chart" class="chart-clickable" data-state="steps"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart Two -->
+                <div class="charts-two">
+                    <div class="charts-card">
+                        <p class="chart-title">Tickets résolus par Agents</p>
+                        <canvas id="bar-chart"></canvas>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </t>
+</templates>

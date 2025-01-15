@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <!-- Vue des données graphiques -->
+        <record id="view_ticket_graph" model="ir.ui.view">
+            <field name="name">ticket.ticket.graph</field>
+            <field name="model">ticket.ticket</field>
+            <field name="arch" type="xml">
+                <graph string="Tickets Résolus et Non Résolus" type="bar">
+                    <field name="statut"/>
+                    <field name="id" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- action for access to graph -->
+        <record id="action_ticket_graph" model="ir.actions.act_window">
+            <field name="name">Graphique des tickets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ticket.ticket</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_ticket_graph"/>
+        </record>
+
+        <!-- board main -->
+        <menuitem id="menu_ticket_graph" name="Analyse" parent="menu_ticket" action="action_ticket_graph" sequence="50" />
+    </data>
+</odoo>

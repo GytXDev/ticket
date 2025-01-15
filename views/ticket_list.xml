@@ -1,0 +1,137 @@
+<odoo>
+    <data>
+        <!-- vue des tickets sous forme de liste -->
+        <record id="view_ticket_tree" model="ir.ui.view">
+        <field name="name">ticket.ticket.list</field>
+        <field name="model">ticket.ticket</field>
+        <field name="arch" type="xml">
+            <list class="custom_tree">
+                <field name="name" />
+                <field name="problem_type"/>
+                <field name="short_description"/>
+                <field name="statut"
+                       decoration-success="statut=='résolu'"
+                       decoration-danger="statut=='non-résolu'"
+                       widget="badge"
+                />
+                <field name="niveau_urgence" class="emergency"
+                       decoration-success="niveau_urgence=='moyen'"
+                       decoration-danger="niveau_urgence=='très urgent'"
+                       decoration-warning="niveau_urgence =='urgent'"
+                       widget="badge"
+                />
+                <field name="assignee"/>
+                <field name="period"/>
+                <field name="location"/>
+                <field name="date_fix" class="date_fix"/>
+            </list>
+        </field>
+    </record>
+
+
+        <!-- vue sur kanban -->
+        <record id="view_ticket_kanban" model="ir.ui.view">
+            <field name="name">ticket.ticket.kanban</field>
+            <field name="model">ticket.ticket</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="kanban_state" sample="1" class="custom_kanban" default_order="last_updated_on desc" force_content="1" editable="bottom">
+                    <field name="statut"/>
+                    <field name="kanban_state"/>
+                     <field name="last_updated_on" invisible="1"/>
+                     <field name="kanban_state" on-change="_onchange_kanban_state"/>
+                    <progressbar field="kanban_state" colors='{"done": "success", "cancelled": "danger", "in_progress" : "warning"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record" t-attf-action="action_ticket_create">
+                                <div class="o_kanban_content">
+                                    <div class="o_kanban_primary">
+                                        <div class="o_kanban_title">
+                                            <div class="name_location_wrapper">
+                                                <field name="name" class="name_name"/>
+                                                <div class="location_wrapper">
+                                                    <field name="location"/>
+                                                    <i class="fa fa-map-marker"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_primary">
+                                        <div class="kanban_desc">
+                                            <field name="description" class="desc"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_secondary" style="display: flex;">
+                                        <div class="statut_dot" >
+                                            <!-- <field string="."/>-->
+                                            <field name="statut"
+                                                decoration-success="statut == 'résolu'"
+                                                decoration-danger="statut == 'non-résolu'"
+                                                widget="badge"
+                                                options="{'no_open': True}"
+                                            />
+                                        </div>
+                                        <div class="urgence_dot">
+                                            <!--  <field string="." />  -->
+                                            <field name="niveau_urgence" class="urgence_dot"
+                                                   decoration-success = "niveau_urgence=='moyen'"
+                                                   decoration-danger = "niveau_urgence=='très urgent'"
+                                                   decoration-warning ="niveau_urgence =='urgent'"
+                                                   widget="badge"
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- <div class="o_dropdown_kanban dropdown" t-if="!selection_mode">
+                                        <a role="button" class="dropdown-toggle o-no-caret btn" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                            <span class="fa fa-ellipsis-v"/>
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <t t-if="widget.editable">
+                                                <a role="menuitem" type="edit" class="dropdown-item">Afficher...</a>
+                                            </t>
+                                            <t t-if="widget.deletable">
+                                                <a role="menuitem" type="delete" class="dropdown-item">Supprimer</a>
+                                            </t>
+                                        </div>
+                                    </div> -->
+                                    <div class="o_kanban_footer">
+                                        <div class="assignee_wrapper">
+                                            <field name="kanban_state"
+                                                   widget="state_selection"/>
+                                            <!-- widget pour l'affichage utilisateur -->
+                                            <field name="directory"/>
+                                        </div>
+                                        <div>
+                                            <field name="period"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_footer">
+                                        <div>
+                                            <field name="ticket_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action pour la vue des ticket -->
+        <record id="action_ticket_list" model="ir.actions.act_window">
+            <field name="name">Liste des tickets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ticket.ticket</field>
+            <field name="view_mode">kanban,list,form,graph,pivot</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Aucun tickets n'as encore été crée
+                </p>
+            </field>
+        </record>
+
+
+        <!-- menu de la liste tickets -->
+        <menuitem id="menu_ticket_list" name="Liste des Tickets" parent="menu_ticket" action="action_ticket_list" sequence="40" />
+    </data>
+</odoo>

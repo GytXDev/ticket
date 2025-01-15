@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+
+        <!-- action pour les paramètres -->
+        <record id="action_ticket_config" model="ir.actions.act_window">
+            <field name="name">Paramètres des Tickets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- board main -->
+        <menuitem id="menu_ticket_config" name="Configuration" parent="menu_ticket" action="action_ticket_config" sequence="60"/>
+    </data>
+</odoo>

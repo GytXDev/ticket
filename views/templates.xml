@@ -1,0 +1,6 @@
+<odoo>
+    <data>
+        <!-- Menu principale pour le module de gestion des tickets -->
+        <menuitem id="menu_ticket" name="Gestion des tickets" web_icon="ticket,static/description/icon.png" sequence="10"/>
+    </data>
+</odoo>

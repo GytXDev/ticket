@@ -1,0 +1,204 @@
+.date_fix {
+  color: #E74C3C;
+  font-weight: bold;
+}
+
+.custom_tree {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+.custom_tree table thead>tr>th:nth-child(4) {
+  width: 150px;
+  text-align: center;
+}
+
+.custom_tree tbody tr.active-row {
+  font-weight: bold;
+  color: #2E4053;
+}
+
+.custom-tree tbody tr:last-of-type {
+  border-bottom: 2px solid blue;
+}
+
+/*couleur des secondes colonnes */
+.custom_tree tbody tr:nth-of-type(even) {
+  background-color: #D5DBDB;
+}
+
+.custom_tree tbody tr {
+  border-bottom: 1px solid black !important;
+}
+
+.custom_tree table td,
+.custom_tree table th {
+  padding: 12px 15px !important;
+}
+
+.custom_tree table td {
+  font-size: 14px !important;
+}
+
+.custom_tree .badge-statut {
+  font-size: 20px !important;
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: #28a745;
+  /* Exemple pour les résolus */
+  color: white;
+  border-radius: 5px;
+}
+
+.custom_tree .badge-urgence {
+  font-size: 20px !important;
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: #ffc107;
+  /* Exemple pour les urgents */
+  color: black;
+  border-radius: 5px;
+}
+
+/* Les entetes */
+/*.custom_tree table thead tr {
+   background-color: #0E6655 !important;
+   color: #fff !important;
+   text-align: left !important;
+}
+
+*/
+/*style css pour la vue kanban */
+
+.name_location_wrapper {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+}
+
+.location_wrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.location_wrapper i {
+  margin-left: 5px;
+  color: #5DADE2;
+  font-size: 14px;
+}
+
+.name_name {
+  font-size: 16px;
+  color: #34495E;
+
+}
+
+
+.assignee_wrapper {
+  text-align: right;
+}
+
+/* stage pour ma vue sur kanban */
+
+/* Style pour l'étape "Nouveau ticket" */
+.o_kanban_dot_status.new {
+  /* Styles spécifiques pour l'étape "Nouveau ticket" */
+  color: red;
+}
+
+/* Style pour l'étape "En cours" */
+.o_kanban_dot_status.in_progress {
+  /* Styles spécifiques pour l'étape "En cours" */
+  color: yellow;
+}
+
+/* Style pour l'étape "Terminé" */
+.o_kanban_dot_status.done {
+  /* Styles spécifiques pour l'étape "Terminé" */
+  color: green;
+}
+
+/* Style pour l'étape "Annulé" */
+.o_kanban_dot_status.cancelled {
+  /* Styles spécifiques pour l'étape "Annulé" */
+  color: grey;
+}
+
+/* style pour ma vue sur kanban */
+
+.o_kanban_record {
+  margin-top: 15px;
+}
+
+
+.o_kanban_record {
+  background-color: #E74C3C;
+}
+
+
+/*style pour les dots statut */
+.o_kanban_dot_status,
+.o_kanban_dot_niveau_urgence {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.o_kanban_dot_status.green-dot-status {
+  background-color: green;
+}
+
+.o_kanban_dot_status.red-dot-status {
+  background-color: red;
+}
+
+.o_kanban_dot_niveau_urgence.yellow-dot-urgence {
+  background-color: yellow;
+}
+
+.o_kanban_dot_niveau_urgence.orange-dot-urgence {
+  background-color: orange;
+}
+
+.o_kanban_dot_niveau_urgence.red-dot-urgence {
+  background-color: red;
+}
+
+.o_dropdown_kanban.dropdown .fa-ellipsis-v {
+  display: inline-block !important;
+}
+
+/* Style pour les dot */
+
+.statut_dot {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.urgence_dot {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.kanban_desc {
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+
+
+/* marge pour la div avec l'utilisateur */
+
+
+/* Design pour la vue de formulaire */
+.date_fix {
+  color: red;
+}

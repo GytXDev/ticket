@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <!-- Formulaire de création de tickets -->
+        <record id="view_ticket_form" model="ir.ui.view">
+            <field name="name">ticket.ticket.form</field>
+            <field name="model">ticket.ticket</field>
+            <field name="arch" type="xml">
+                <form string="Créer un Ticket" class="o_form_container" discard="1">
+                 <header>
+                    <button special="cancel" string="Annuler" class="oe_link" />
+                </header>
+                    <sheet>
+                        <div class="o_group o_group_col_6">
+                            <group>
+                                <field name="name" placeholder="Nom du client ou demandeur" />
+                                <field name="problem_type" />
+                                <field name="niveau_urgence" />
+                                <field name="statut" widget="selection"/>
+                            </group>
+                            <group>
+                                <field name="location" placeholder="Lieu de l'intervention" />
+                                <field name="directory" />
+                                <field name="assignee" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <field name="user_ticket" placeholder="Entrez l'étiquette utilisateur" />
+                            </group>
+                        </div>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" placeholder="Décrivez le problème ici..." nolabel="1" />
+                                <field name="contact" placeholder="Personne à contacter" />
+                            </page>
+                            <page string="Destinataires de l'Email">
+                                <group>
+                                    <field name="email_recipients" placeholder="Liste des adresses email des destinataires, séparées par des virgules"/>
+                                </group>
+                            </page>
+                            <page string="Dates">
+                                <group>
+                                    <field name="create_date" readonly="1" />
+                                    <field name="date_fix" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions pour afficher la vue de création -->
+        <record id="action_ticket_create" model="ir.actions.act_window">
+            <field name="name">Créer un ticket</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ticket.ticket</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_ticket_form"/>
+        </record>
+
+        <!-- Menu principal pour accéder à la création de ticket -->
+        <menuitem id="menu_ticket_create"
+                  name="Créer un ticket"
+                  parent="menu_ticket"
+                  action="action_ticket_create"
+                  sequence="30"/>
+    </data>
+</odoo>
