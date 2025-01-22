@@ -1,3 +1,4 @@
+// static\src\js\dashboard.js
 /** @odoo-module **/
 import { registry } from '@web/core/registry';
 import { Component, onMounted, useState } from "@odoo/owl";
@@ -240,13 +241,19 @@ export class Dashboard extends Component {
         const selectedOption = chartSelectionElem ? chartSelectionElem.value : 'all';
         console.log("Selected period for chart:", selectedOption);
 
-        let endpoint = '/api/tickets/chart/today';
+        let endpoint = '/api/tickets/stats'; // Par défaut, récupérer toutes les données des statistiques
+
+        // Vérifier la sélection de la période
         if (selectedOption === 'month') {
             endpoint = '/api/tickets/chart/month';
         } else if (selectedOption === 'week') {
             endpoint = '/api/tickets/chart/week';
+        } else if (selectedOption === 'today') {
+            endpoint = '/api/tickets/chart/today';
         } else if (selectedOption === 'year') {
             endpoint = '/api/tickets/chart/year';
+        } else if (selectedOption === 'all') {
+            endpoint = '/api/tickets/stats'; 
         }
 
         console.log("Fetching chart data from endpoint:", endpoint);
@@ -447,8 +454,6 @@ export class Dashboard extends Component {
             name: `Tickets: ${stateLabel}`,
         });
     }
-
-
 
 }
 

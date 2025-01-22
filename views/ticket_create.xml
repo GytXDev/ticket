@@ -6,9 +6,6 @@
             <field name="model">ticket.ticket</field>
             <field name="arch" type="xml">
                 <form string="Créer un Ticket" class="o_form_container" discard="1">
-                 <header>
-                    <button special="cancel" string="Annuler" class="oe_link" />
-                </header>
                     <sheet>
                         <div class="o_group o_group_col_6">
                             <group>
@@ -33,7 +30,7 @@
                             </page>
                             <page string="Destinataires de l'Email">
                                 <group>
-                                    <field name="email_recipients" placeholder="Liste des adresses email des destinataires, séparées par des virgules"/>
+                                    <field name="email_recipients" widget="many2many_tags"/>
                                 </group>
                             </page>
                             <page string="Dates">

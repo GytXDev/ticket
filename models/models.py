@@ -27,7 +27,7 @@ class Ticket(models.Model):
     location = fields.Char(string='Lieu')
     niveau_urgence = fields.Selection([('moyen', 'Moyen'), ('urgent', 'Urgent'), ('très urgent', 'Très Urgent')],
                                       string='Niveau d\'urgence')
-    assignee = fields.Many2many('res.partner', string='Assigné à', domain=[('is_company', '=', False)])
+    assignee = fields.Many2many('res.partner', string='Assigné à', domain=[('is_company', '=', False)], relation='ticket_assignee_rel')
     create_date = fields.Datetime(string='Date de création')
     user_ticket = fields.Char(string='Étiquette Utilisateur', required=True)
     period = fields.Char(compute='_compute_period', string='Info')
@@ -40,13 +40,11 @@ class Ticket(models.Model):
     duree = fields.Float(string='Durée')
     last_updated_on = fields.Datetime(string='Last Updated On', compute='_compute_last_updated_on', store=True)
     ticket_id = fields.Char(string='Identifiant', readonly=True, copy=False, default='ID none')
-    email_recipients = fields.Text(
-        string='Destinataires',
-        help="Liste des adresses email des destinataires, séparées par des virgules."
-    )
+    # Nouveau champ pour sélectionner les destinataires des e-mails
+    email_recipients = fields.Many2many('res.partner', string='Destinataires e-mails', domain=[('email', '!=', False)], relation='ticket_email_recipients_rel')
 
 
-  #methode pour tronquer les noms des responsables
+    #methode pour tronquer les noms des responsables
     def _truncate_directory(self, directory, max_length=17):
         return (directory[:max_length] + '...') if (directory and len(directory) > max_length) else directory
 
@@ -70,7 +68,6 @@ class Ticket(models.Model):
         for ticket in self:
             if ticket.create_date and ticket.date_fix and ticket.date_fix < ticket.create_date.date():
                 raise ValidationError("La date d'échéance ne peut pas être antérieure à la date de création.")
-
 
    #mis a jour du kanban_state
     @api.depends('kanban_state')
@@ -101,13 +98,8 @@ class Ticket(models.Model):
 
     #recuperer les mails
     def _get_recipients(self):
-        recipients = []
-        if self.assignee:
-            recipients += [employee.email for employee in self.assignee]
-        if self.directory and self.directory.email:
-            recipients.append(self.directory.email)
-        if self.name and self.name.email:
-            recipients.append(self.name.email)
+        """Récupère les adresses e-mails sélectionnées comme destinataires."""
+        recipients = [partner.email for partner in self.email_recipients if partner.email]
         return recipients
 
     #assignement du kanban_state
@@ -169,12 +161,11 @@ class Ticket(models.Model):
         if not self.email_recipients:
             return  # Ne rien faire si aucun destinataire n'est spécifié
 
-        # Utilisez les destinataires spécifiés dans le champ `email_recipients`
-        email_recipients = self.email_recipients.split(',')
-        email_recipients = [email.strip() for email in email_recipients if email.strip()]
-
+        # Récupérer les adresses e-mails des partenaires (s'il y en a plusieurs)
+        email_recipients = [partner.email for partner in self.email_recipients if partner.email]
+        
         if not email_recipients:
-            return  # Ne rien faire si le champ est mal formé ou vide après traitement
+            return  # Ne rien faire si aucune adresse e-mail n'est trouvée
         
         #  Récupérer l'utilisateur SMTP configuré
         smtp_user = self.get_smtp_user()
@@ -380,7 +371,6 @@ class Ticket(models.Model):
             existing_ticket = self.search([('ticket_id', '=', ticket_id)])
             if not existing_ticket:
                 return ticket_id
-            
 
     #comptage des tickets par mois
     @api.model

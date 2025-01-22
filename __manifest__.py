@@ -5,7 +5,7 @@
     'description': 'Module permettant de créer et gérer des tickets',
     'author': 'Ogoouée Technologie',
     'category': 'Technique',
-    'website': 'https://new.ogoouetech.com',
+    'website': 'https://ogoouetech.com',
     'sequence': -100,
     'depends': ['base', 'web', 'bus'],
     'data': [

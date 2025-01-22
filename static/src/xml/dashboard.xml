@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- static\src\xml\dashboard.xml -->
 <templates xml:space="preserve">
     <t t-name="owl.Dashboard" owl="1">
         <div class="grid-container">
