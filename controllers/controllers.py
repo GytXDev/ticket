@@ -1,4 +1,3 @@
-# controllers\controllers.py
 # controllers/controllers.py
 from odoo import http
 from odoo.http import request

@@ -76,7 +76,7 @@ body {
   margin: 20px 0;
 }
 
-.card,
+.ticket-card,
 .card-one {
   display: flex;
   flex-direction: column;
@@ -89,24 +89,24 @@ body {
   box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover,
+.ticket-card:hover,
 .card-one:hover {
   cursor: pointer;
 }
 
-.card:first-child {
+.ticket-card:first-child {
   border-left: 7px solid #246dec;
 }
 
-.card:nth-child(2) {
+.ticket-card:nth-child(2) {
   border-left: 7px solid #f5b74f;
 }
 
-.card:nth-child(3) {
+.ticket-card:nth-child(3) {
   border-left: 7px solid #367952;
 }
 
-.card:nth-child(4) {
+.ticket-card:nth-child(4) {
   border-left: 7px solid #cc3c43;
 }
 
@@ -126,7 +126,7 @@ body {
   border-left: 7px solid #cc3c43;
 }
 
-.card>span,
+.ticket-card>span,
 .card-one>span {
   font-size: 20px;
   font-weight: 600;

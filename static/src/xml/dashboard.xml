@@ -9,8 +9,8 @@
                         <span class="ticket_count" t-esc="state.totalTickets"/>
                     </p>
                 </div>
-                <div class="style-switcher">
-                    <div class="style-switcher-toggler s-icon">
+                <div class="ticket-style-switcher">
+                    <div class="ticket-style-switcher-toggler s-icon">
                         <i class="fa fa-cog"></i>
                     </div>
                     <p>Choisir une période</p>
@@ -26,7 +26,7 @@
                 </div>
                 <!-- Cards Items -->
                 <div class="main-cards">
-                    <div class="card" data-state="new">
+                    <div class="ticket-card" data-state="new">
                         <div class="card-inner">
                             <p class="text-primary">Nouveaux Tickets</p>
                             <span class="text-blue fa fa-tags"></span>
@@ -34,7 +34,7 @@
                         <span class="text-primary font-weight-bold new_ticket_count"></span>
                     </div>
 
-                    <div class="card" data-state="in_progress">
+                    <div class="ticket-card" data-state="in_progress">
                         <div class="card-inner">
                             <p class="text-primary">Tickets en Cours</p>
                             <span class="text-orange fa fa-clock-o"></span>
@@ -42,7 +42,7 @@
                         <span class="text-primary font-weight-bold in_progress_ticket_count"></span>
                     </div>
 
-                    <div class="card" data-state="done">
+                    <div class="ticket-card" data-state="done">
                         <div class="card-inner">
                             <p class="text-primary">Tickets Terminés</p>
                             <span class="text-green fa fa-check-circle"></span>
@@ -50,7 +50,7 @@
                         <span class="text-primary font-weight-bold done_ticket_count"></span>
                     </div>
 
-                    <div class="card" data-state="cancelled">
+                    <div class="ticket-card" data-state="cancelled">
                         <div class="card-inner">
                             <p class="text-primary">Tickets Annulés</p>
                             <span class="text-red fa fa-times-circle-o"></span>

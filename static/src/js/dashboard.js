@@ -63,9 +63,9 @@ export class Dashboard extends Component {
 
     _eventListeners() {
         // Style switcher
-        document.querySelectorAll('.style-switcher-toggler').forEach(el => {
+        document.querySelectorAll('.ticket-style-switcher-toggler').forEach(el => {
             el.addEventListener('click', () => {
-                const styleSwitcher = document.querySelector('.style-switcher');
+                const styleSwitcher = document.querySelector('.ticket-style-switcher');
                 if (styleSwitcher) {
                     styleSwitcher.classList.toggle('open');
                 }
@@ -83,10 +83,9 @@ export class Dashboard extends Component {
         }
 
         // Cartes principales des tickets
-        document.querySelectorAll('.card').forEach(el => {
+        document.querySelectorAll('.ticket-card').forEach(el => {
             el.addEventListener('click', (event) => {
                 const state = el.dataset.state;
-                console.log("Card clicked:", state);
                 if (state) {
                     this._redirectToState(state);
                 }
@@ -132,11 +131,9 @@ export class Dashboard extends Component {
 
 
     async _emergencyCounts() {
-        console.log("Starting _emergencyCounts...");
 
         const chartSelectionElem = document.querySelector('#chart-selection');
         const selectedOption = chartSelectionElem ? chartSelectionElem.value : 'all';
-        console.log("Selected period for emergencies:", selectedOption);
 
         let endpoint = '/api/tickets/emergency'; // Default endpoint
 
@@ -150,11 +147,9 @@ export class Dashboard extends Component {
             endpoint = '/api/tickets/emergency/years';
         }
 
-        console.log("Fetching emergency counts from endpoint:", endpoint);
 
         try {
             const result = await rpc(endpoint, {});
-            console.log("Emergency counts fetched successfully:", result);
 
             // Updating UI
             const moyenElem = document.querySelector('.ticket_count_moyen');
@@ -163,15 +158,12 @@ export class Dashboard extends Component {
 
             if (moyenElem) {
                 moyenElem.textContent = result.moyen || 0;
-                console.log("Updated moyen count:", result.moyen || 0);
             }
             if (urgentElem) {
                 urgentElem.textContent = result.urgent || 0;
-                console.log("Updated urgent count:", result.urgent || 0);
             }
             if (tresUrgentElem) {
                 tresUrgentElem.textContent = result['très urgent'] || 0;
-                console.log("Updated très urgent count:", result['très urgent'] || 0);
             }
         } catch (error) {
             console.error("Error while fetching emergency counts:", error);
@@ -219,7 +211,7 @@ export class Dashboard extends Component {
                 if (elem) elem.textContent = item.value;
             });
 
-            document.querySelectorAll('.card').forEach(el => {
+            document.querySelectorAll('.ticket-card').forEach(el => {
                 el.addEventListener('click', (event) => {
                     const state = el.dataset.state;
                     if (state) {
@@ -235,11 +227,9 @@ export class Dashboard extends Component {
     }
 
     async _renderChart() {
-        console.log("Starting _renderChart...");
 
         const chartSelectionElem = document.querySelector('#chart-selection');
         const selectedOption = chartSelectionElem ? chartSelectionElem.value : 'all';
-        console.log("Selected period for chart:", selectedOption);
 
         let endpoint = '/api/tickets/stats'; // Par défaut, récupérer toutes les données des statistiques
 
@@ -253,10 +243,8 @@ export class Dashboard extends Component {
         } else if (selectedOption === 'year') {
             endpoint = '/api/tickets/chart/year';
         } else if (selectedOption === 'all') {
-            endpoint = '/api/tickets/stats'; 
+            endpoint = '/api/tickets/stats';
         }
-
-        console.log("Fetching chart data from endpoint:", endpoint);
 
         if (this.pieChart) {
             this.pieChart.destroy();
@@ -267,14 +255,10 @@ export class Dashboard extends Component {
 
         try {
             const result = await rpc(endpoint, {});
-            console.log("Chart data fetched successfully:", result);
 
             // Nettoyage des données
             const filteredSteps = result.steps.filter((step, index) => result.ticket_counts[index] > 0);
             const filteredCounts = result.ticket_counts.filter(count => count > 0);
-
-            console.log("Filtered Steps:", filteredSteps);
-            console.log("Filtered Counts:", filteredCounts);
 
             const pieData = {
                 labels: ['Résolu', 'Non Résolu'],
@@ -425,7 +409,6 @@ export class Dashboard extends Component {
     }
 
     _redirectToState(state) {
-        console.log("Redirecting to state:", state);
         let stateLabel = '';
         switch (state) {
             case 'new':
@@ -445,7 +428,6 @@ export class Dashboard extends Component {
                 return;
         }
 
-        console.log(`State label: ${stateLabel}`);
         this.action.doAction({
             type: "ir.actions.act_window",
             res_model: "ticket.ticket",
